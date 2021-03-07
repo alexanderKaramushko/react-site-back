@@ -70,11 +70,7 @@ module.exports = {
 			"ExportDeclaration": { "multiline": true, "minProperties": 3 }
 		}],
 		"indent": ["error", 2],
-		"padding-line-between-statements": ["error",
-			{ blankLine: "always", prev: "*", next: "return" },
-			{ blankLine: "always", prev: "const", next: "*" },
-			{ blankLine: "always", prev: "let", next: "*" }
-		],
+		"newline-after-var": ["error", "always"]
   },
   settings: {
 		'import/extensions': ['.ts'],
