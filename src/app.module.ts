@@ -10,10 +10,9 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
   imports: [
     TypeOrmModule.forRoot({
       database: DB_NAME || 'react-site',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       host: DB_HOST || 'localhost',
       password: DB_PASSWORD || 'postgres',
-      port: Number(DB_PORT) || 5435,
+      port: Number(DB_PORT) || 5432,
       synchronize: true,
       type: 'postgres',
       username: DB_USERNAME || 'postgres',

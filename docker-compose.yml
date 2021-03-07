@@ -12,6 +12,24 @@ services:
       - postgre
     networks:
       - app
+  
+  api:
+    build: .
+    ports:
+      - 3001:3000
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    depends_on:
+      - db
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: react-site
+      DB_HOST: db
+      DB_PORT: 5432
+    networks:
+      - app
 
 volumes:
   postgre:
