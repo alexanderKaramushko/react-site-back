@@ -9,6 +9,7 @@ async function bootstrap() {
     .setDescription('The react site api description')
     .setVersion('0.1')
     .addTag('api')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
