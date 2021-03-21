@@ -4,12 +4,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CasesController } from './cases/cases.controller';
 import { CasesModule } from './cases/cases.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AuthController } from 'auth/auth.controller';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 
 @Module({
   controllers: [
     AppController,
+    AuthController,
     CasesController
   ],
   imports: [
@@ -23,7 +27,9 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
       type: 'postgres',
       username: DB_USERNAME || 'postgres',
     }),
-    CasesModule
+    CasesModule,
+    AuthModule,
+    UsersModule
   ],
   providers: [AppService]
 })

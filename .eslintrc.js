@@ -13,7 +13,6 @@ module.exports = {
   root: true,
   env: {
     node: true,
-    jest: true,
   },
   ignorePatterns: ['.eslintrc.js'],
   rules: {
@@ -36,14 +35,10 @@ module.exports = {
 		'import/extensions': ['error', 'ignorePackages', {
 			js: 'never',
 			json: 'never',
-			jsx: 'never',
 			ts: 'never',
-			tsx: 'never'
 		}],
 		'import/prefer-default-export': 'off',
-		'indent': ['error', 4, {
-			'ignoredNodes': ['JSXElement'],
-		}],
+		'indent': ['error', 4],
 		'linebreak-style': ['error', 'windows'],
 		'linebreak-style': 0,
 		'max-len': ['error', {
