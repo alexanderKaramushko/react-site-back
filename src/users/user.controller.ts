@@ -1,5 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Role } from 'common/types/role';
+import { Roles } from 'utils';
 import { CreateUserRequestDTO } from './dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
@@ -11,6 +13,7 @@ export class UsersController {
   // eslint-disable-next-line no-unused-vars
   constructor(private usersService: UsersService) {}
 
+  @Roles(Role.ADMIN)
   @Post()
   @ApiOkResponse({
     description: 'Создать пользователя',

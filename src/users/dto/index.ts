@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Roles } from 'common/types/roles';
+import { Role } from 'common/types/role';
 
 export class CreateUserRequestDTO {
 
@@ -10,9 +10,9 @@ export class CreateUserRequestDTO {
   password: string;
 
   @ApiProperty({
-    default: Roles.USER,
-    enum: Roles,
+    default: Role.USER,
+    enum: Role,
   })
-  role: Roles
+  role: Role
 
 }

@@ -7,6 +7,9 @@ import { CasesModule } from './cases/cases.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { AuthController } from 'auth/auth.controller';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'authorization/roles.guard';
+import { JwtAuthGuard } from 'auth/jwt-auth.guard';
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
 
@@ -31,6 +34,16 @@ const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
     AuthModule,
     UsersModule
   ],
-  providers: [AppService]
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    }
+  ]
 })
 export class AppModule {}
