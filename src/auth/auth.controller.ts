@@ -4,7 +4,7 @@ import { LoginRequestDTO } from './dto';
 import { User } from 'users/user.entity';
 import { AuthService } from 'auth/auth.service';
 import { LocalAuthGuard } from 'auth/local.auth.guard';
-import { JwtAuthGuard } from 'auth/jwt-auth.guard';
+import { Public } from 'utils';
 
 @Controller()
 @ApiTags('auth')
@@ -14,6 +14,7 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
+  @Public()
   @Post('auth/login')
   @ApiBearerAuth()
   @ApiOkResponse({
@@ -23,7 +24,6 @@ export class AuthController {
     return this.authService.login(loginRequestDTO as any);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
   @ApiBearerAuth()
   @ApiOkResponse({

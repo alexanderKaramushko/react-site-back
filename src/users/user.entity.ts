@@ -1,5 +1,5 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
-import { Roles } from 'common/types/roles';
+import { Role } from 'common/types/role';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -24,9 +24,9 @@ export class User {
   password: string
 
   @Column({
-    default: Roles.USER,
+    default: Role.USER,
     nullable: false,
   })
-  role: Roles
+  role: Role
 
 }
