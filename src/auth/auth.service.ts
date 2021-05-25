@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { compare } from 'bcrypt'
 import { User } from 'users/user.entity';
 import { JwtService } from '@nestjs/jwt';
@@ -32,16 +32,26 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User) {
+  async login(user: User): Promise<{ access_token: string } | never> {
     const { id, username } = user;
-    const payload: JwtPayload = { sub: id, username }
+    const foundUser = await this.getProfile(username);
+
+    if (!foundUser) {
+      throw new HttpException(`User ${username} not found`, HttpStatus.NOT_FOUND);
+    }
+
+    const payload: JwtPayload = { 
+      role: foundUser.role,
+      sub: id,
+      username, 
+    };
 
     return {
       access_token: this.jwtService.sign(payload),
     }
   }
 
-  async getProfile(username: string) {
+  async getProfile(username: string): Promise<User | undefined> {
     const user = await this.usersService.findOneByName(username);
 
     return user;
